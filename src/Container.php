@@ -47,15 +47,13 @@ class Container
     /**
      * Get an instance from the container
      *
-     * @template T of object
-     * @param class-string<T> $abstract
-     * @return T
+     * @param string $abstract Class name or custom binding key
+     * @return object
      */
     public function get(string $abstract): object
     {
         // Return existing singleton
         if (isset($this->instances[$abstract])) {
-            /** @var T */
             return $this->instances[$abstract];
         }
 
@@ -63,7 +61,6 @@ class Container
         if (isset($this->bindings[$abstract])) {
             $instance = $this->bindings[$abstract]();
             $this->instances[$abstract] = $instance;
-            /** @var T */
             return $instance;
         }
 
@@ -76,9 +73,8 @@ class Container
     /**
      * Make a new instance
      *
-     * @template T of object
-     * @param class-string<T> $class
-     * @return T
+     * @param string $class Class name to instantiate
+     * @return object
      */
     public function make(string $class): object
     {
