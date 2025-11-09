@@ -21,9 +21,9 @@ class Container
      * Bind a concrete implementation to an interface
      *
      * @param string $abstract
-     * @param (callable(): object)|class-string $concrete
+     * @param callable|string $concrete (callable(): object)|class-string
      */
-    public function bind(string $abstract, callable|string $concrete): void
+    public function bind(string $abstract, $concrete): void
     {
         if (is_string($concrete)) {
             /** @var class-string $concrete */
@@ -37,9 +37,9 @@ class Container
      * Bind a singleton instance
      *
      * @param string $abstract
-     * @param (callable(): object)|class-string $concrete
+     * @param callable|string $concrete (callable(): object)|class-string
      */
-    public function singleton(string $abstract, callable|string $concrete): void
+    public function singleton(string $abstract, $concrete): void
     {
         $this->bind($abstract, $concrete);
     }
