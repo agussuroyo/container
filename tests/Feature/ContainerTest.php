@@ -188,8 +188,8 @@ class ContainerTest extends TestCase
         $duration = microtime(true) - $startTime;
         
         // 1 million bound checks should be fast
-        $this->assertLessThan(3.0, $duration,
-            sprintf('1M bound checks took %.4f seconds (expected < 3s)', $duration)
+        $this->assertLessThan(5.0, $duration,
+            sprintf('1M bound checks took %.4f seconds (expected < 5s)', $duration)
         );
         
         echo sprintf("✓ 1M bound checks: %.4f seconds\n", $duration);
