@@ -9,5 +9,3 @@ parameters:
     ignoreErrors:
         - '#Dynamic call to static method PHPUnit\\Framework\\Assert::#'
         - '#Constructor of class .+\\Tests\\Fixtures\\.+ has an unused parameter#'
-        - '#Parameter \#1 \$class of method .+::make\(\) expects class-string<NonExistentClass>#'
-        - '#Parameter \#1 \$abstract of method .+::get\(\) expects class-string<NonExistentClass>#'
