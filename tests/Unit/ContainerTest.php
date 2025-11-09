@@ -173,6 +173,166 @@ class ContainerTest extends TestCase
         $this->assertTrue(true); // If we get here, test passes
     }
 
+    // ============ STRING/WORD KEY TESTS ============
+    public function testCanBindWithStringKey(): void
+    {
+        $this->container->bind('my.service', SimpleClass::class);
+
+        $instance = $this->container->get('my.service');
+
+        $this->assertInstanceOf(SimpleClass::class, $instance);
+    }
+
+    public function testCanBindWithDottedNotation(): void
+    {
+        $this->container->bind('app.logger.file', SimpleClass::class);
+
+        $instance = $this->container->get('app.logger.file');
+
+        $this->assertInstanceOf(SimpleClass::class, $instance);
+    }
+
+    public function testCanBindMultipleStringKeysToSameClass(): void
+    {
+        $this->container->bind('logger.main', SimpleClass::class);
+        $this->container->bind('logger.backup', SimpleClass::class);
+
+        $instance1 = $this->container->get('logger.main');
+        $instance2 = $this->container->get('logger.backup');
+
+        $this->assertInstanceOf(SimpleClass::class, $instance1);
+        $this->assertInstanceOf(SimpleClass::class, $instance2);
+        // Different instances because different keys
+        $this->assertNotSame($instance1, $instance2);
+    }
+
+    public function testCanBindStringKeyWithCallable(): void
+    {
+        $this->container->bind('custom.service', function () {
+            $instance = new SimpleClass();
+            return $instance;
+        });
+
+        $instance = $this->container->get('custom.service');
+
+        $this->assertInstanceOf(SimpleClass::class, $instance);
+    }
+
+    public function testStringKeyBindingReturnsSameInstanceOnMultipleCalls(): void
+    {
+        $this->container->bind('shared.service', SimpleClass::class);
+
+        $instance1 = $this->container->get('shared.service');
+        $instance2 = $this->container->get('shared.service');
+
+        $this->assertSame($instance1, $instance2);
+    }
+
+    public function testCanUseSingletonWithStringKey(): void
+    {
+        $this->container->singleton('singleton.service', SimpleClass::class);
+
+        $instance1 = $this->container->get('singleton.service');
+        $instance2 = $this->container->get('singleton.service');
+
+        $this->assertSame($instance1, $instance2);
+    }
+
+    public function testBoundReturnsTrueForStringKey(): void
+    {
+        $this->container->bind('my.custom.key', SimpleClass::class);
+
+        $this->assertTrue($this->container->bound('my.custom.key'));
+    }
+
+    public function testBoundReturnsFalseForUnboundStringKey(): void
+    {
+        $this->assertFalse($this->container->bound('non.existent.key'));
+    }
+
+    public function testCanClearSingletonWithStringKey(): void
+    {
+        $this->container->bind('clearable.service', SimpleClass::class);
+        
+        $instance1 = $this->container->get('clearable.service');
+        $this->container->clearInstance('clearable.service');
+        $instance2 = $this->container->get('clearable.service');
+
+        $this->assertNotSame($instance1, $instance2);
+    }
+
+    public function testCanBindStringKeyWithComplexDependencies(): void
+    {
+        $this->container->bind('complex.service', ClassWithDependency::class);
+
+        $instance = $this->container->get('complex.service');
+
+        $this->assertInstanceOf(ClassWithDependency::class, $instance);
+        $this->assertInstanceOf(SimpleClass::class, $instance->getDependency());
+    }
+
+    public function testCanBindStringKeyWithCallableReturningComplexObject(): void
+    {
+        $this->container->bind(SomeInterface::class, InterfaceImplementation::class);
+        
+        $this->container->bind('factory.service', function () {
+            return new ClassWithDependency(new SimpleClass());
+        });
+
+        $instance = $this->container->get('factory.service');
+
+        $this->assertInstanceOf(ClassWithDependency::class, $instance);
+    }
+
+    public function testStringKeyBindingsAreIndependentFromClassBindings(): void
+    {
+        // Bind the class directly
+        $classInstance = $this->container->get(SimpleClass::class);
+        
+        // Bind with a string key
+        $this->container->bind('named.service', SimpleClass::class);
+        $namedInstance = $this->container->get('named.service');
+
+        // Should be different instances
+        $this->assertNotSame($classInstance, $namedInstance);
+    }
+
+    public function testCanUseNumericStringAsKey(): void
+    {
+        $this->container->bind('123', SimpleClass::class);
+
+        $instance = $this->container->get('123');
+
+        $this->assertInstanceOf(SimpleClass::class, $instance);
+    }
+
+    public function testCanUseUnderscoreInStringKey(): void
+    {
+        $this->container->bind('my_custom_service', SimpleClass::class);
+
+        $instance = $this->container->get('my_custom_service');
+
+        $this->assertInstanceOf(SimpleClass::class, $instance);
+    }
+
+    public function testCanUseDashInStringKey(): void
+    {
+        $this->container->bind('my-custom-service', SimpleClass::class);
+
+        $instance = $this->container->get('my-custom-service');
+
+        $this->assertInstanceOf(SimpleClass::class, $instance);
+    }
+
+    public function testStringKeyWithColonNotation(): void
+    {
+        $this->container->bind('service:logger', SimpleClass::class);
+
+        $instance = $this->container->get('service:logger');
+
+        $this->assertInstanceOf(SimpleClass::class, $instance);
+    }
+
     // ============ NEGATIVE TEST CASES ============
     public function testMakeThrowsExceptionForNonExistentClass(): void
     {
