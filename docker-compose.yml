@@ -1,9 +1,73 @@
 services:
-  app:
-    image: composer:latest
-    container_name: php-composer-dev
-    working_dir: /app
+  php74:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PHP_VERSION: "7.4"
+    container_name: php-container-74
     volumes:
       - ./:/app
-    command: sleep infinity
+    environment:
+      - COMPOSER_MEMORY_LIMIT=-1
+  
+  php80:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PHP_VERSION: "8.0"
+    container_name: php-container-80
+    volumes:
+      - ./:/app
+    environment:
+      - COMPOSER_MEMORY_LIMIT=-1
+  
+  php81:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PHP_VERSION: "8.1"
+    container_name: php-container-81
+    volumes:
+      - ./:/app
+    environment:
+      - COMPOSER_MEMORY_LIMIT=-1
+  
+  php82:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PHP_VERSION: "8.2"
+    container_name: php-container-82
+    volumes:
+      - ./:/app
+    environment:
+      - COMPOSER_MEMORY_LIMIT=-1
+  
+  php83:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PHP_VERSION: "8.3"
+    container_name: php-container-83
+    volumes:
+      - ./:/app
+    environment:
+      - COMPOSER_MEMORY_LIMIT=-1
+  
+  php84:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PHP_VERSION: "8.4"
+    container_name: php-container-84
+    volumes:
+      - ./:/app
+    environment:
+      - COMPOSER_MEMORY_LIMIT=-1
   
