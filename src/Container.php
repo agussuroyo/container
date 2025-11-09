@@ -47,8 +47,9 @@ class Container
     /**
      * Get an instance from the container
      *
-     * @param string $abstract Class name or custom binding key
-     * @return object
+     * @template T of object
+     * @param class-string<T>|string $abstract Class name or custom binding key
+     * @return ($abstract is class-string<T> ? T : object)
      */
     public function get(string $abstract): object
     {
