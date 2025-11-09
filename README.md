@@ -7,18 +7,16 @@ A simple dependency injection container for PHP 8.1+.
 
 ## Overview
 
-This is a lightweight dependency injection (DI) container designed for performance and memory efficiency. It provides automatic dependency resolution, interface binding, and singleton management with minimal overhead.
+This is a lightweight dependency injection (DI) container. It provides automatic dependency resolution, interface binding, and singleton management.
 
 ### Key Features
 
-- **Fast**: Handles 10,000+ resolutions per second
-- **Memory Efficient**: Minimal memory footprint (~5KB per container instance)
 - **Auto-wiring**: Automatically resolves constructor dependencies
 - **Interface Binding**: Bind interfaces to concrete implementations
 - **Singleton Support**: Manage singleton instances with automatic caching and clearing
 - **Zero Configuration**: Works out of the box with no setup
 - **Type-Safe**: Full PHP 8.1+ type hints and generics support
-- **Thoroughly Tested**: Comprehensive unit and performance tests
+- **Thoroughly Tested**: Comprehensive unit tests
 
 ## Installation
 
@@ -307,32 +305,6 @@ Clear a specific singleton instance or all singleton instances.
 - `$abstract`: The abstract to clear, or `null` to clear all instances
 - Note: This does not remove bindings, only clears cached instances
 
-## Performance
-
-This container is optimized for performance and memory efficiency:
-
-### Speed Benchmarks
-
-- **10,000 simple resolutions**: < 0.5 seconds
-- **10,000 dependency resolutions**: < 1.0 seconds
-- **10,000 binding resolutions**: < 0.5 seconds
-- **100,000 singleton lookups**: < 0.5 seconds
-- **1,000,000 bound checks**: < 5.0 seconds
-
-### Memory Efficiency
-
-- **Empty container footprint**: ~5KB
-- **10,000 bindings**: < 10MB
-- **1,000 singleton resolutions**: < 50KB
-- **No memory leaks**: Verified through repeated resolution tests
-
-### Performance Tips
-
-1. Use `get()` instead of `make()` when you want singletons (much faster)
-2. Bind frequently-used services early to avoid repeated resolution
-3. Use closures for complex instantiation logic only when necessary
-4. The container caches all `get()` resolutions automatically
-
 ## Error Handling
 
 The container throws clear exceptions for common issues:
@@ -435,7 +407,7 @@ composer check
 ### Test Coverage
 
 - **Unit Tests**: Core functionality, edge cases, error handling
-- **Feature Tests**: Performance benchmarks, memory efficiency tests
+- **Feature Tests**: Integration and feature tests
 - **Static Analysis**: PHPStan level max with strict rules
 
 ## Development
@@ -476,10 +448,9 @@ The project uses:
 ### Design Principles
 
 1. **Simplicity**: Minimal API surface, easy to understand
-2. **Performance**: Optimized for speed and memory efficiency
-3. **Type Safety**: Full PHP type hints and strict types
-4. **Single Responsibility**: Each method has one clear purpose
-5. **Fail Fast**: Clear exceptions for invalid operations
+2. **Type Safety**: Full PHP type hints and strict types
+3. **Single Responsibility**: Each method has one clear purpose
+4. **Fail Fast**: Clear exceptions for invalid operations
 
 ### Internal Structure
 
@@ -510,7 +481,7 @@ Contributions are welcome! Please follow these guidelines:
 
 ### Q: How is this different from other DI containers?
 
-This container focuses on simplicity, speed, and minimal memory usage. It provides only essential features without unnecessary complexity.
+This container focuses on simplicity. It provides only essential features without unnecessary complexity.
 
 ### Q: Does it support constructor promotion?
 
