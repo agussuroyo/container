@@ -6,9 +6,11 @@ namespace AgusSuroyo\Container\Tests\Fixtures;
 
 class ClassWithInterface
 {
-    public function __construct(
-        private SomeInterface $implementation
-    ) {
+    private SomeInterface $implementation;
+
+    public function __construct(SomeInterface $implementation)
+    {
+        $this->implementation = $implementation;
     }
 
     public function getImplementation(): SomeInterface

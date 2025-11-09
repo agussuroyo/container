@@ -6,9 +6,11 @@ namespace AgusSuroyo\Container\Tests\Fixtures;
 
 class ClassWithDefaultValue
 {
-    public function __construct(
-        private string $value = 'default'
-    ) {
+    private string $value;
+
+    public function __construct(string $value = 'default')
+    {
+        $this->value = $value;
     }
 
     public function getValue(): string

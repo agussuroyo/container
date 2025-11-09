@@ -6,9 +6,11 @@ namespace AgusSuroyo\Container\Tests\Fixtures;
 
 class ClassWithDependency
 {
-    public function __construct(
-        private SimpleClass $dependency
-    ) {
+    private SimpleClass $dependency;
+
+    public function __construct(SimpleClass $dependency)
+    {
+        $this->dependency = $dependency;
     }
 
     public function getDependency(): SimpleClass
