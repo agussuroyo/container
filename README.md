@@ -317,7 +317,7 @@ This container is optimized for performance and memory efficiency:
 - **10,000 dependency resolutions**: < 1.0 seconds
 - **10,000 binding resolutions**: < 0.5 seconds
 - **100,000 singleton lookups**: < 0.5 seconds
-- **1,000,000 bound checks**: < 3.0 seconds
+- **1,000,000 bound checks**: < 5.0 seconds
 
 ### Memory Efficiency
 
