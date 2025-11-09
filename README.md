@@ -1,8 +1,8 @@
-# Container
+# Dependency Injection Container
 
-A simple dependency injection container for PHP 8.1+.
+A simple dependency injection container for PHP 7.4+.
 
-[![PHP Version](https://img.shields.io/badge/PHP-8.1%2B-blue)](https://www.php.net/)
+[![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-blue)](https://www.php.net/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 ## Overview
@@ -15,8 +15,8 @@ This is a lightweight dependency injection (DI) container. It provides automatic
 - **Interface Binding**: Bind interfaces to concrete implementations
 - **Singleton Support**: Manage singleton instances with automatic caching and clearing
 - **Zero Configuration**: Works out of the box with no setup
-- **Type-Safe**: Full PHP 8.1+ type hints and generics support
-- **Thoroughly Tested**: Comprehensive unit tests
+- **Type-Safe**: Full type hints and generics support
+- **Thoroughly Tested**: Comprehensive unit tests across PHP 7.4-8.4
 
 ## Installation
 
@@ -28,7 +28,7 @@ composer require agussuroyo/container
 
 ## Requirements
 
-- PHP 8.1 or higher
+- PHP 7.4 or higher
 - No additional dependencies
 
 ## Quick Start
@@ -414,9 +414,9 @@ composer check
 
 ### Requirements
 
-- PHP 8.1+
+- PHP 7.4+
 - Composer
-- PHPUnit 10+
+- PHPUnit 9.5+ (10+ for PHP 8.1+)
 - PHPStan 1.10+
 
 ### Setup
@@ -442,6 +442,7 @@ The project uses:
 - **PHPStan** level max
 - **PHPStan strict rules**
 - **PHPUnit** for testing
+- **CI/CD** testing across PHP 7.4, 8.0, 8.1, 8.2, 8.3, and 8.4
 
 ## Architecture
 
@@ -485,7 +486,7 @@ This container focuses on simplicity. It provides only essential features withou
 
 ### Q: Does it support constructor promotion?
 
-Yes! The container fully supports PHP 8.1+ constructor property promotion.
+Yes! The container fully supports PHP 8.0+ constructor property promotion.
 
 ### Q: How do I resolve circular dependencies?
 
