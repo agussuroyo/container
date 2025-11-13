@@ -1,0 +1,26 @@
+{
+  "name": "container",
+  "version": "1.0.0",
+  "description": "A simple dependency injection container for PHP 7.4+.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "semantic-release": "semantic-release"
+  },
+  "keywords": [],
+  "author": "Agus Suroyo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agussuroyo/container.git"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^7.1.0",
+    "@semantic-release/git": "^10.0.1",
+    "semantic-release": "^24.2.9"
+  }
+}
